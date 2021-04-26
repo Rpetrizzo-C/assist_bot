@@ -4,4 +4,4 @@ __author__ = "Rodrigo Petrizzo 'Prefiero pasar 3 horas haciendo un bot oop para 
 
 if __name__ == '__main__':
     start = webdriver.webaccions()
-    start.send_accions_to_loggin()      
+    start.work_flow()      
