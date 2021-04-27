@@ -52,9 +52,7 @@ class webaccions(webmanager, dbdata.database_extract):
             self.password = self.parsed[1]
             print(self.user, self.password)
             self.login_actions(self.user, self.password)
-            time.sleep(3)
             self.webmanager.locate_elements_on_logout()
-            time.sleep(3)
             self.webmanager.locate_elements_on_login()
 
         self.webmanager.driver.close()    
