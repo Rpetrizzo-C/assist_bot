@@ -26,6 +26,24 @@ class webmanager:
         self.dropdown_arrow = self.driver.find_element_by_link_text('Cerrar sesión')
         self.dropdown_arrow.click()
 
+    def locate_assist_button(self):
+        self.assist_link = self.driver.find_element_by_link_text("Asistencia")    
+
+    def reload(self):
+        self.driver.refresh()
+
+    def be_pressent(self):
+        self.driver.execute_script("window.scrollTo(0,900)")
+        self.locate_assist_button()
+        self.assist_link.click()
+        self.set_assist_link = self.driver.find_element_by_link_text("Enviar asistencia")
+        self.set_assist_link.click()
+        self.pressent_circle = self.driver.find_element_by_id("id_status_17477")
+        self.pressent_circle.click()
+        self.set_assist_button = self.driver.find_element_by_id("id_submitbutton")
+        self.set_assist_button.click()
+
+
 
 class webaccions(webmanager, dbdata.database_extract):
     def __init__(self):
@@ -52,6 +70,16 @@ class webaccions(webmanager, dbdata.database_extract):
             self.password = self.parsed[1]
             print(self.user, self.password)
             self.login_actions(self.user, self.password)
+            self.located = False
+            while self.located == False:
+                try:
+                    self.webmanager.be_pressent()
+                    self.located = True
+                except NoSuchElementException:
+                    
+                    self.webmanager.reload()
+                    self.located = False 
+                    time.sleep(10)
             self.webmanager.locate_elements_on_logout()
             self.webmanager.locate_elements_on_login()
 
